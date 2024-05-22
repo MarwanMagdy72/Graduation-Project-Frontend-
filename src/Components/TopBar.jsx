@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import Toolbar from "@mui/material/Toolbar";
 import MenuIcon from "@mui/icons-material/Menu";
 import {
   Box,
+  Button,
   IconButton,
   InputBase,
   Stack,
@@ -17,14 +18,28 @@ import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
+import { useAuth } from "../Context/authContext";
+import { useNavigate } from "react-router-dom";
 
 export default function TopBar({ open, setOpen, setMode }) {
   const theme = useTheme();
 
   const drawerWidth = 240;
+  const { Logout } = useAuth();
+  const navigate = useNavigate();
+  const [error, setError] = useState("");
 
   const handleDrawerOpen = () => {
     setOpen(true);
+  };
+  const handleLogout = async () => {
+    setError("");
+    try {
+      await Logout();
+      navigate("/login");
+    } catch {
+      setError("Logout Failed!");
+    }
   };
 
   const AppBar = styled(MuiAppBar, {
@@ -112,6 +127,7 @@ export default function TopBar({ open, setOpen, setMode }) {
               inputProps={{ "aria-label": "search" }}
             />
           </Search>
+         <button className="btn btn-dark ms-4"    onClick={handleLogout}> Logout </button>
 
           <Box flexGrow={1} />
           <Stack direction={"row"}>
