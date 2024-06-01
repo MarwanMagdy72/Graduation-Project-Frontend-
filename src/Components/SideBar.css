@@ -1,0 +1,7 @@
+.hoverIcon:hover{
+    background-color: white;
+    color: #2F8B3A;
+    padding: 5px;
+    border-radius: 8px;
+    transition: all 0.2s;
+}

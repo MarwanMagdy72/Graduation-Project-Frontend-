@@ -1,33 +1,16 @@
-import { Box, Typography, useTheme } from '@mui/material'
+import { Box , useTheme } from '@mui/material'
 import { ResponsiveLine } from '@nivo/line'
-import React from 'react'
 import { data } from './LineChartData'
 
 
 export default function LineChart({inDashboard = false}) {
   const theme = useTheme()
   return (
-    <Box sx={{height: inDashboard?  '350px' : '75vh' ,width:'100%' }}>
-
-{inDashboard ? null : (
-        <Box>
-          <Typography
-            color={theme.palette.info.light}
-            fontSize={"35px"}
-            fontWeight={"bold"}
-          >
-       Line Chart
-
-          </Typography>
-          <Typography fontWeight={"bold"}>
-          Simple Line Chart
-          </Typography>
-        </Box>
-      )}
+    <Box sx={{height: inDashboard? '300px' : '75vh' ,width:'100%' }}>
 
 <ResponsiveLine
         data={data}
-        margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
+        margin={{ top: 30, right: 40, bottom: 50, left: 60 }}
         theme={{
           textColor: theme.palette.text.primary,
           fontSize: 11,
@@ -155,7 +138,11 @@ export default function LineChart({inDashboard = false}) {
         pointBorderColor={{ from: 'serieColor' }}
         pointLabelYOffset={-12}
         useMesh={true}
-        legends={[
+
+
+        legends={
+        inDashboard? []:
+        [
             {
                 anchor: 'bottom-right',
                 direction: 'column',

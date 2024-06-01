@@ -11,7 +11,7 @@ export default function Chart1() {
       sx={{
         width: "110px",
         height: "100px",
-       
+      
        
       }}
     >

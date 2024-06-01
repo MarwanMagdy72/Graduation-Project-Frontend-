@@ -2,21 +2,19 @@ import React from "react";
 import List from "@mui/material/List";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
-import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
+import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import MuiDrawer from "@mui/material/Drawer";
 import {
-  Avatar,
   Box,
   Tooltip,
-  Typography,
   styled,
   useTheme,
 } from "@mui/material";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import {  useLocation, useNavigate } from "react-router-dom";
 
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import PeopleOutlinedIcon from "@mui/icons-material/PeopleOutlined";
@@ -28,8 +26,13 @@ import ContactSupportOutlinedIcon from "@mui/icons-material/ContactSupportOutlin
 import BarChartOutlinedIcon from "@mui/icons-material/BarChartOutlined";
 import DonutLargeOutlinedIcon from "@mui/icons-material/DonutLargeOutlined";
 import TimelineOutlinedIcon from "@mui/icons-material/TimelineOutlined";
-import LanguageOutlinedIcon from "@mui/icons-material/LanguageOutlined";
+
+import LocalShippingOutlinedIcon from '@mui/icons-material/LocalShippingOutlined';
+import RecyclingOutlinedIcon from '@mui/icons-material/RecyclingOutlined';
+import ManageHistoryOutlinedIcon from '@mui/icons-material/ManageHistoryOutlined';
+import FilterVintageOutlinedIcon from '@mui/icons-material/FilterVintageOutlined';
 import { grey } from "@mui/material/colors";
+import './SideBar.css'
 const Arr1 = [
   { text: "Dashboard", icon: <HomeOutlinedIcon />, path: "/" },
   { text: "Manage Team", icon: <PeopleOutlinedIcon />, path: "/team" },
@@ -43,15 +46,25 @@ const Arr1 = [
     icon: <ReceiptOutlinedIcon />,
     path: "/invoices",
   },
+  {
+    text: "Companies",
+    icon: <LocalShippingOutlinedIcon />,
+    path: "/companies",
+  },
 ];
 const Arr2 = [
+  { text: "Recycling", icon: <RecyclingOutlinedIcon />, path: "/recycle" },
+  
+  { text: "Managing", icon: <ManageHistoryOutlinedIcon />, path: "/manage" },
+
+  { text: "Antika ", icon: <FilterVintageOutlinedIcon />, path: "/antika" },
+
   { text: "Profile Form", icon: <PersonOutlineOutlinedIcon />, path: "/form" },
+
   { text: "Calendar", icon: <CalendarMonthOutlinedIcon />, path: "/calendar" },
-  {
-    text: "FAQ Page",
-    icon: <ContactSupportOutlinedIcon />,
-    path: "/faq",
-  },
+
+  { text: "FAQ Page", icon: <ContactSupportOutlinedIcon />, path: "/faq",},
+
 ];
 const Arr3 = [
   { text: "Bar Chart", icon: <BarChartOutlinedIcon />, path: "/barChart" },
@@ -65,11 +78,7 @@ const Arr3 = [
     icon: <TimelineOutlinedIcon />,
     path: "/lineChart",
   },
-  {
-    text: "Geography Chart",
-    icon: <LanguageOutlinedIcon />,
-    path: "/geography",
-  },
+
 ];
 
 export default function SideBar({ open, setOpen, DrawerHeader }) {
@@ -123,69 +132,15 @@ export default function SideBar({ open, setOpen, DrawerHeader }) {
 
   return (
     <>
-      <Drawer variant="permanent"  open={open}>
-        <DrawerHeader>
-          <Link
-            to={"/"}
-            style={{
-              color: "inherit",
-              textAlign: "center",
-              fontWeight: "900",
-              fontSize: "25px",
-              width: "100%",
-            }}
-          >
-            {" "}
-            Dashboard{" "}
-          </Link>
-          <IconButton onClick={handleDrawerClose}>
-            <CancelOutlinedIcon />
+      <Drawer variant="permanent"  open={open} >
+
+        <DrawerHeader sx={{bgcolor:theme.palette.bgcolorSideBar.main }}>
+          <IconButton onClick={handleDrawerClose} sx={{color:"white"}}>
+            <KeyboardArrowLeftIcon />
           </IconButton>
         </DrawerHeader>
-        <Divider />
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            alignItems: "center",
-            my: "10px",
-          }}
-        >
-          <Avatar
-            alt="Travis Howard"
-            src="https://i.pinimg.com/564x/de/7b/df/de7bdf43e2ae039eee0b69d7fa307e4b.jpg"
-            sx={{
-              width: open ? "90px" : "50px",
-              height: open ? "90px" : "50px",
-              transition: "0.25s",
-            }}
-          />
 
-          <Typography
-            sx={{
-              my: "5px",
-              fontWeight: "600",
-              fontSize: open ? "22px" : "0",
-              transition: "0.5s",
-              
-            }}
-          >
-            Marwan Magdy
-          </Typography>
-          <Typography
-            sx={{
-              fontSize: open ? "18px" : "0",
-              transition: "0.5s",
-              color: theme.palette.info.main,
-            }}
-          >
-            Admin
-          </Typography>
-        </Box>
-        <Divider />
-
-        <List>
+        <List sx={{bgcolor:theme.palette.bgcolorSideBar.main }}>
           {Arr1.map((item, index) => (
             <Tooltip
               ListItem
@@ -201,12 +156,14 @@ export default function SideBar({ open, setOpen, DrawerHeader }) {
                     px: 2.5,
 
                     backgroundColor:
-                      location.pathname === item.path
-                        ? theme.palette.mode === "dark"
+                      location.pathname === item.path 
+                      ? theme.palette.mode === "dark"
                           ? grey[600]
-                          : grey[300]
+                          :"white"
                         : null,
+
                   }}
+                  
                   onClick={() => {
                     navigate(item.path);
                   }}
@@ -216,10 +173,20 @@ export default function SideBar({ open, setOpen, DrawerHeader }) {
                       minWidth: 0,
                       mr: open ? 3 : "auto",
                       justifyContent: "center",
+                      
+                      color:
+                      location.pathname === item.path 
+                      ? theme.palette.mode === "dark"
+                          ? grey[50]
+                          : "green"
+                        : "white",
                     }}
+                    className="hoverIcon"
                   >
                     {item.icon}
                   </ListItemIcon>
+
+
                   <ListItemText
                     primary={item.text}
                     sx={{ opacity: open ? 1 : 0 }}
@@ -229,9 +196,9 @@ export default function SideBar({ open, setOpen, DrawerHeader }) {
             </Tooltip>
           ))}
         </List>
-        <Divider />
-        {}
-        <List>
+        
+        <Divider/> 
+        <List  sx={{bgcolor:theme.palette.bgcolorSideBar.main}}>
           {Arr2.map((item, index) => (
             <Tooltip
               key={index}
@@ -245,22 +212,30 @@ export default function SideBar({ open, setOpen, DrawerHeader }) {
                     justifyContent: open ? "initial" : "center",
                     px: 2.5,
                     backgroundColor:
-                      location.pathname === item.path
-                        ? theme.palette.mode === "dark"
-                          ? grey[600]
-                          : grey[300]
-                        : null,
+                    location.pathname === item.path 
+                    ? theme.palette.mode === "dark"
+                        ? grey[600]
+                        :"white"
+                      : null,
                   }}
                   onClick={() => {
                     navigate(item.path);
                   }}
+                  
                 >
                   <ListItemIcon
                     sx={{
                       minWidth: 0,
                       mr: open ? 3 : "auto",
                       justifyContent: "center",
+                      color:
+                      location.pathname === item.path 
+                      ? theme.palette.mode === "dark"
+                          ? grey[50]
+                          : "green"
+                        : "white",
                     }}
+                    className="hoverIcon"
                   >
                     {item.icon}
                   </ListItemIcon>
@@ -273,9 +248,9 @@ export default function SideBar({ open, setOpen, DrawerHeader }) {
             </Tooltip>
           ))}
         </List>
-        <Divider />
-
-        <List>
+        
+        <Divider/> 
+        <List  sx={{bgcolor:theme.palette.bgcolorSideBar.main}}>
           {Arr3.map((item, index) => (
             <Tooltip
               key={index}
@@ -289,11 +264,11 @@ export default function SideBar({ open, setOpen, DrawerHeader }) {
                     justifyContent: open ? "initial" : "center",
                     px: 2.5,
                     backgroundColor:
-                      location.pathname === item.path
-                        ? theme.palette.mode === "dark"
-                          ? grey[600]
-                          : grey[300]
-                        : null,
+                    location.pathname === item.path 
+                    ? theme.palette.mode === "dark"
+                        ? grey[600]
+                        :"white"
+                      : null,
                   }}
                   onClick={() => {
                     navigate(item.path);
@@ -304,7 +279,14 @@ export default function SideBar({ open, setOpen, DrawerHeader }) {
                       minWidth: 0,
                       mr: open ? 3 : "auto",
                       justifyContent: "center",
+                      color:
+                      location.pathname === item.path 
+                      ? theme.palette.mode === "dark"
+                          ? grey[50]
+                          : "green"
+                        : "white", 
                     }}
+                    className="hoverIcon"
                   >
                     {item.icon}
                   </ListItemIcon>
@@ -317,7 +299,28 @@ export default function SideBar({ open, setOpen, DrawerHeader }) {
             </Tooltip>
           ))}
         </List>
+
+
       </Drawer>
     </>
   );
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// import MovingOutlinedIcon from '@mui/icons-material/MovingOutlined';
