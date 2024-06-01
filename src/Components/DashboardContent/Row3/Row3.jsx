@@ -2,7 +2,7 @@ import { Grid, Paper, Stack, Typography, useTheme } from "@mui/material";
 import React from "react";
 import RedialChart from "../../../Pages/RedialChart/RedialChart";
 import BarChart from "../../../Pages/BarChart/BarChart";
-import Geography from "../../../Pages/Geography/Geography";
+
 
 export default function Row3() {
   const theme = useTheme();
@@ -67,7 +67,7 @@ export default function Row3() {
             flex: 1,
           }}
         >
-          <Geography inDashboard />
+          
         </Paper>
       </Grid>
     </Grid>

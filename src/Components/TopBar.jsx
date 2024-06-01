@@ -1,23 +1,25 @@
 import React, { useState } from "react";
 import Toolbar from "@mui/material/Toolbar";
-import MenuIcon from "@mui/icons-material/Menu";
+import SortIcon from '@mui/icons-material/Sort';
 import {
+  Avatar,
   Box,
-  Button,
   IconButton,
   InputBase,
   Stack,
+  Typography,
   alpha,
   styled,
   useTheme,
+  
 } from "@mui/material";
 import MuiAppBar from "@mui/material/AppBar";
 import SearchIcon from "@mui/icons-material/Search";
 import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
-import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
-import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
+// import  "./TopBar.css";
+
 import { useAuth } from "../Context/authContext";
 import { useNavigate } from "react-router-dom";
 
@@ -65,7 +67,7 @@ export default function TopBar({ open, setOpen, setMode }) {
     borderRadius: theme.shape.borderRadius,
     backgroundColor: alpha(theme.palette.common.white, 0.15),
     "&:hover": {
-      backgroundColor: alpha(theme.palette.common.white, 0.25),
+      backgroundColor:"#ebe9e9",
     },
     marginLeft: 0,
     width: "100%",
@@ -100,40 +102,54 @@ export default function TopBar({ open, setOpen, setMode }) {
       },
     },
   }));
+// #2C2C2C
 
   return (
+
     <>
       <AppBar position="fixed" open={open}>
-        <Toolbar>
+        <Toolbar  sx={{bgcolor:theme.palette.bgcolortopbar.main}}>
           <IconButton
             color="inherit"
             aria-label="open drawer"
             onClick={handleDrawerOpen}
             edge="start"
             sx={{
-              marginRight: 5,
+              marginRight: 2,
+              color:theme.palette.textColor.main ,
               ...(open && { display: "none" }),
             }}
           >
-            <MenuIcon />
+            <SortIcon />
           </IconButton>
 
-          <Search>
+          <Avatar
+            alt="Travis Howard"
+            src="https://i.pinimg.com/564x/de/7b/df/de7bdf43e2ae039eee0b69d7fa307e4b.jpg"
+            sx={{
+              width: open ? "90px" : "50px",
+              height: open ? "90px" : "50px",
+              transition: "0.25s",
+            }}
+          />
+          <Typography variant="body 1" sx={{fontSize:"21px", marginLeft:"10px",color:theme.palette.textColor.main}}> Hello, Shafeek </Typography>
+
+          <Box flexGrow={1} />
+          <Stack direction={"row"}>
+          <Search sx={{borderRadius:"15px" ,padding:"4px, 16px, 4px, 16px",bgcolor:"#F7F6F9" , color:"#6E8F72"}}>
             <SearchIconWrapper>
               <SearchIcon />
             </SearchIconWrapper>
             <StyledInputBase
               placeholder="Search…"
               inputProps={{ "aria-label": "search" }}
+              className="btnHover"
             />
           </Search>
-         <button className="btn btn-dark ms-4"    onClick={handleLogout}> Logout </button>
 
-          <Box flexGrow={1} />
-          <Stack direction={"row"}>
             {theme.palette.mode === "dark" ? (
               <IconButton
-                color={"inherit"}
+              color={theme.palette.textColor.main }
                 onClick={() => {
                   setMode((prevMode) =>
                     prevMode === "light" ? "dark" : "light"
@@ -147,8 +163,8 @@ export default function TopBar({ open, setOpen, setMode }) {
                 <LightModeOutlinedIcon />
               </IconButton>
             ) : (
-              <IconButton
-                color={"inherit"}
+              <IconButton 
+              color={theme.palette.textColor.main }
                 onClick={() => {
                   setMode((prevMode) =>
                     prevMode === "light" ? "dark" : "light"
@@ -163,17 +179,19 @@ export default function TopBar({ open, setOpen, setMode }) {
               </IconButton>
             )}
 
-            <IconButton color={"inherit"}>
+            <IconButton color={theme.palette.textColor.main }>
               <NotificationsNoneOutlinedIcon />
             </IconButton>
 
-            <IconButton color={"inherit"}>
-              <SettingsOutlinedIcon />
-            </IconButton>
 
-            <IconButton color={"inherit"}>
-              <PersonOutlineOutlinedIcon />
-            </IconButton>
+            <Typography 
+            sx={{border:"2px solid grey" , 
+              borderRadius:"15px",
+              padding : "4px 13px" ,  
+              margin :"auto" , 
+              color:theme.palette.textColor.main
+            }}
+            variant="body1" onClick={handleLogout}> Logout </Typography>
           </Stack>
         </Toolbar>
       </AppBar>

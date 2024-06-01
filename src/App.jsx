@@ -8,7 +8,6 @@ import Calendar from "./Pages/Calendar/Calendar";
 import Contacts from "./Pages/Contacts/Contacts";
 import Faq from "./Pages/Faq/Faq";
 import Form from "./Pages/Form/Form";
-import Geography from "./Pages/Geography/Geography";
 import Invoices from "./Pages/Invoices/Invoices";
 import LineChart from "./Pages/LineChart/LineChart";
 import RedialChart from "./Pages/RedialChart/RedialChart";
@@ -20,6 +19,11 @@ import UpdateProfile from "./Pages/Auth/UpdateProfile";
 import NotFound from "./Pages/NotFound/NotFound";
 import AuthProvider from "./Context/authContext";
 import PrivateRoute from "./Context/PrivateRoute";
+import Companies from "./Pages/Companies/Companies";
+import Recycling from './Pages/Recycling/Recycling' ;
+import Managing from './Pages/Managing/Managing' ; 
+
+import Antika from './Pages/Antika/Antika' ; 
 
 function App() {
   const routes = createBrowserRouter([
@@ -92,14 +96,6 @@ function App() {
           ),
         },
         {
-          path: "geography",
-          element: (
-            <PrivateRoute>
-              <Geography />
-            </PrivateRoute>
-          ),
-        },
-        {
           path: "invoices",
           element: (
             <PrivateRoute>
@@ -107,6 +103,7 @@ function App() {
             </PrivateRoute>
           ),
         },
+
         {
           path: "lineChart",
           element: (
@@ -128,6 +125,38 @@ function App() {
           element: (
             <PrivateRoute>
               <Team />
+            </PrivateRoute>
+          ),
+        },
+        {
+          path: "companies",
+          element: (
+            <PrivateRoute>
+              <Companies />
+            </PrivateRoute>
+          ),
+        },
+        {
+          path: "recycle",
+          element: (
+            <PrivateRoute>
+              <Recycling />
+            </PrivateRoute>
+          ),
+        },
+        {
+          path: "manage",
+          element: (
+            <PrivateRoute>
+              <Managing />
+            </PrivateRoute>
+          ),
+        },
+        {
+          path: "antika",
+          element: (
+            <PrivateRoute>
+              <Antika />
             </PrivateRoute>
           ),
         },
