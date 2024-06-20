@@ -20,7 +20,7 @@ export const getDesignTokens = (mode) => ({
       bodyColor:{
         main :"#F7F6F9"
       }
-   
+  
 
 
     } 
