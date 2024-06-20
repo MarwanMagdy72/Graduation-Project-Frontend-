@@ -1,4 +1,4 @@
-import React from "react";
+
 import { DataGrid } from "@mui/x-data-grid";
 import { teamData } from "./teamData";
 import { Box, Typography, useTheme } from "@mui/material";
