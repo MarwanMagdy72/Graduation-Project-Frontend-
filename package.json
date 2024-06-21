@@ -27,6 +27,7 @@
     "@nivo/line": "^0.84.0",
     "@nivo/pie": "^0.84.0",
     "@nivo/radial-bar": "^0.84.0",
+    "axios": "^1.7.2",
     "bootstrap": "^5.3.3",
     "firebase": "^10.11.1",
     "react": "^18.2.0",

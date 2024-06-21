@@ -1,19 +1,29 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { DataGrid } from "@mui/x-data-grid";
-import { teamData } from "./teamData";
 import { Box, Typography, useTheme } from "@mui/material";
 import VerifiedUserOutlinedIcon from "@mui/icons-material/VerifiedUserOutlined";
 import AdminPanelSettingsOutlinedIcon from "@mui/icons-material/AdminPanelSettingsOutlined";
 import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
+import { useAuth } from "../../Context/authContext";
 
 export default function Team() {
   const theme = useTheme();
+  const { fetchAllUsers } = useAuth();
+  const [teamData, setTeamData] = useState([]);
+
+  useEffect(() => {
+    const getUsers = async () => {
+      const users = await fetchAllUsers();
+      setTeamData(users);
+    };
+    getUsers();
+  }, [fetchAllUsers]);
 
   const columns = [
     {
       field: "id",
       headerName: "ID",
-      width: 33,
+      width: 90,
       align: "center",
       headerAlign: "center",
     },
@@ -40,35 +50,33 @@ export default function Team() {
       headerAlign: "center",
     },
     {
-      field: "access",
-      headerName: "Access",
+      field: "role",
+      headerName: "Role",
       align: "center",
       flex: 1,
       headerAlign: "center",
-      renderCell: ({ row: { access } }) => {
+      renderCell: ({ row: { role } }) => {
         return (
           <Box
             sx={{
               p: "8px",
-
               borderRadius: "4px",
               width: "100px",
               display: "flex",
               justifyContent: "space-evenly",
               textAlign: "center",
               alignItems: "center",
-
               backgroundColor:
-                access === "Admin"
+                role === "Admin"
                   ? theme.palette.info.dark
-                  : access === "User"
+                  : role === "User"
                   ? theme.palette.success.dark
-                  : access === "Manager"
+                  : role === "Manager"
                   ? theme.palette.error.main
                   : theme.palette.warning.dark,
             }}
           >
-            {access === "User" ? (
+            {role === "User" ? (
               <VerifiedUserOutlinedIcon
                 sx={{
                   fontSize: "16px",
@@ -76,7 +84,7 @@ export default function Team() {
                   color: "white",
                 }}
               />
-            ) : access === "Admin" ? (
+            ) : role === "Admin" ? (
               <AdminPanelSettingsOutlinedIcon
                 sx={{
                   fontSize: "16px",
@@ -84,7 +92,7 @@ export default function Team() {
                   color: "white",
                 }}
               />
-            ) : access === "Manager" ? (
+            ) : role === "Manager" ? (
               <ManageAccountsIcon
                 sx={{
                   fontSize: "16px",
@@ -95,10 +103,8 @@ export default function Team() {
             ) : (
               ""
             )}
-
             <Typography variant="body" color={"white"}>
-              {" "}
-              {access}
+              {role}
             </Typography>
           </Box>
         );
@@ -114,7 +120,7 @@ export default function Team() {
         }}
       >
         <Typography
-          color={theme.palette.info.light}
+          color={theme.palette.success.light}
           fontSize={"35px"}
           fontWeight={"bold"}
         >
@@ -122,8 +128,13 @@ export default function Team() {
         </Typography>
         <Typography fontWeight={"bold"}>Managing the Team Members</Typography>
       </Box>
-      <Box sx={{ height: "auto", width: "auto", m: "auto" }}>
-        <DataGrid rows={teamData} columns={columns} />
+      <Box sx={{ minHeight: "75vh", width: "100%" }}>
+        <DataGrid
+          rows={teamData}
+          columns={columns}
+          pageSize={5}
+          checkboxSelection
+        />
       </Box>
     </>
   );

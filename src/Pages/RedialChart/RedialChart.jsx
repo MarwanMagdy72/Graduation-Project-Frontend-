@@ -10,7 +10,7 @@ export default function RedialChart({ inDashboard = false }) {
       {inDashboard ? null : (
         <Box>
           <Typography
-            color={theme.palette.info.light}
+            color={theme.palette.success.light}
             fontSize={"35px"}
             fontWeight={"bold"}
           >

@@ -2,6 +2,7 @@ import React, { useRef, useState } from "react";
 import { Button, Card, TextField, Alert, CardContent } from "@mui/material";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../Context/authContext";
+import { Stack } from "@mui/system";
 
 function ForgotPassword() {
   const [loading, setLoading] = useState(false);
@@ -27,42 +28,49 @@ function ForgotPassword() {
 
   return (
     <>
-      <Card sx={{ maxWidth: 400, margin: "0 auto" }}>
-        <CardContent>
-          <h2 style={{ textAlign: "center" }}>Forgot Password</h2>
-          {error && <Alert severity="error"> {error} </Alert>}
-          {message && <Alert severity="info"> {message} </Alert>}
-          <form onSubmit={handleSubmit}>
-            <TextField
-              id="email"
-              label="Email"
-              type="email"
-              fullWidth
-              inputRef={emailRef}
-              variant="outlined"
-              margin="normal"
-            />
+      <Stack
+        sx={{
+          justifyContent: "center",
+          alignItems: "center",
+          minHeight: "100vh",
+        }}
+      >
+        <Card sx={{ maxWidth: 700, margin: "0 auto" }}>
+          <CardContent>
+            <h2 style={{ textAlign: "center" }}>Forgot Password</h2>
+            {error && <Alert severity="error"> {error} </Alert>}
+            {message && <Alert severity="info"> {message} </Alert>}
+            <form onSubmit={handleSubmit}>
+              <TextField
+                id="email"
+                label="Email"
+                type="email"
+                
+                fullWidth
+                inputRef={emailRef}
+                variant="outlined"
+                margin="normal"
+              />
 
-            <Button
-              variant="contained"
-              color="primary"
-              type="submit"
-              fullWidth
-              disabled={loading}
-              sx={{ mt: 3 }}
-            >
-              Submit
-            </Button>
-          </form>
+              <Button
+                variant="contained"
+                color="success"
+                type="submit"
+                fullWidth
+                disabled={loading}
+                sx={{ mt: 3 }}
+              >
+                Submit
+              </Button>
+            </form>
 
-          <div style={{ textAlign: "center", marginTop: 20 }}>
-            <Link to={"/login"}>Sign In</Link>
-          </div>
-        </CardContent>
-      </Card>
-      <div style={{ textAlign: "center", marginTop: 20 }}>
-        Don't have an account? <Link to={"/sign-up"}>Sign Up</Link>
-      </div>
+            <div style={{ textAlign: "center", marginTop: 20 }}>
+              <Link to={"/login"} className="text-success">Sign In</Link>
+            </div>
+          </CardContent>
+        </Card>
+      </Stack>
+
     </>
   );
 }
