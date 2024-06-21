@@ -1,7 +1,11 @@
  
 import FullCalendar from "@fullcalendar/react"; // must go before plugins
 import dayGridPlugin from "@fullcalendar/daygrid"; // a plugin!
-import { Box, Paper, Stack } from "@mui/material";
+  add-company-and-users-pages
+import { Box, Paper, Stack, Typography } from "@mui/material";
+ 
+ 
+ 
 import { formatDate } from "@fullcalendar/core";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
@@ -32,8 +36,8 @@ function renderSidebarEvent(event) {
 }
 
 const Calendar = () => {
-  const [weekendsVisible, setweekendsVisible] = useState(true);
-  const [currentEvents, setcurrentEvents] = useState([]);
+  const [weekendsVisible, setWeekendsVisible] = useState(true);
+  const [currentEvents, setCurrentEvents] = useState([]);
 
   let eventGuid = 0;
   function createEventId() {
@@ -59,7 +63,7 @@ const Calendar = () => {
 
   const handleEventClick = (clickInfo) => {
     if (
-      confirm(
+      window.confirm(
         `Are you sure you want to delete the event '${clickInfo.event.title}'`
       )
     ) {
@@ -68,19 +72,19 @@ const Calendar = () => {
   };
 
   const handleEvents = (events) => {
-    setcurrentEvents(events);
+    setCurrentEvents(events);
   };
 
   return (
-    <Stack direction={"row"} gap={2}>
-      <Paper sx={{ flex: 0.25 }} className="demo-app-sidebar">
-        <h2 style={{ textAlign: "center" }}>
+    <Stack direction="row" gap={2} p={2}>
+      <Paper sx={{ flex: 0.25, p: 2 }}>
+        <Typography variant="h6" align="center" gutterBottom>
           All Events ({currentEvents.length})
-        </h2>
+        </Typography>
         <ul>{currentEvents.map(renderSidebarEvent)}</ul>
       </Paper>
 
-      <Box sx={{ flex: 1 }} className="demo-app-main">
+      <Box sx={{ flex: 1, p: 2 }}>
         <FullCalendar
           plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
           headerToolbar={{
@@ -89,10 +93,10 @@ const Calendar = () => {
             right: "dayGridMonth,timeGridWeek,timeGridDay",
           }}
           initialView="dayGridMonth"
-          editable={true}
-          selectable={true}
-          selectMirror={true}
-          dayMaxEvents={true}
+          editable
+          selectable
+          selectMirror
+          dayMaxEvents
           weekends={weekendsVisible}
           select={handleDateSelect}
           eventContent={renderEventContent}

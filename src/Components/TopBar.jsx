@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import Toolbar from "@mui/material/Toolbar";
-import SortIcon from '@mui/icons-material/Sort';
+import SortIcon from "@mui/icons-material/Sort";
 import {
   Avatar,
   Box,
+  Button,
   IconButton,
   InputBase,
   Stack,
@@ -11,29 +12,26 @@ import {
   alpha,
   styled,
   useTheme,
-  
 } from "@mui/material";
 import MuiAppBar from "@mui/material/AppBar";
 import SearchIcon from "@mui/icons-material/Search";
 import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
-import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
-// import  "./TopBar.css";
-
+import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
 import { useAuth } from "../Context/authContext";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function TopBar({ open, setOpen, setMode }) {
   const theme = useTheme();
-
   const drawerWidth = 240;
-  const { Logout } = useAuth();
+  const { Logout, currentUser, userDetails } = useAuth();
   const navigate = useNavigate();
   const [error, setError] = useState("");
 
   const handleDrawerOpen = () => {
     setOpen(true);
   };
+
   const handleLogout = async () => {
     setError("");
     try {
@@ -67,7 +65,7 @@ export default function TopBar({ open, setOpen, setMode }) {
     borderRadius: theme.shape.borderRadius,
     backgroundColor: alpha(theme.palette.common.white, 0.15),
     "&:hover": {
-      backgroundColor:"#ebe9e9",
+      backgroundColor: "#ebe9e9",
     },
     marginLeft: 0,
     width: "100%",
@@ -86,12 +84,12 @@ export default function TopBar({ open, setOpen, setMode }) {
     alignItems: "center",
     justifyContent: "center",
   }));
+
   const StyledInputBase = styled(InputBase)(({ theme }) => ({
     color: "inherit",
     width: "100%",
     "& .MuiInputBase-input": {
       padding: theme.spacing(1, 1, 1, 0),
-      // vertical padding + font size from searchIcon
       paddingLeft: `calc(1em + ${theme.spacing(4)})`,
       transition: theme.transitions.create("width"),
       [theme.breakpoints.up("sm")]: {
@@ -102,13 +100,11 @@ export default function TopBar({ open, setOpen, setMode }) {
       },
     },
   }));
-// #2C2C2C
 
   return (
-
     <>
       <AppBar position="fixed" open={open}>
-        <Toolbar  sx={{bgcolor:theme.palette.bgcolortopbar.main}}>
+        <Toolbar sx={{ bgcolor: theme.palette.bgcolortopbar.main }}>
           <IconButton
             color="inherit"
             aria-label="open drawer"
@@ -116,7 +112,7 @@ export default function TopBar({ open, setOpen, setMode }) {
             edge="start"
             sx={{
               marginRight: 2,
-              color:theme.palette.textColor.main ,
+              color: theme.palette.textColor.main,
               ...(open && { display: "none" }),
             }}
           >
@@ -124,74 +120,93 @@ export default function TopBar({ open, setOpen, setMode }) {
           </IconButton>
 
           <Avatar
-            alt="Travis Howard"
+            alt="User Avatar"
             src="https://i.pinimg.com/564x/de/7b/df/de7bdf43e2ae039eee0b69d7fa307e4b.jpg"
             sx={{
-              width: open ? "90px" : "50px",
-              height: open ? "90px" : "50px",
+              width: open ? "75px" : "50px",
+              height: open ? "75px" : "50px",
               transition: "0.25s",
             }}
           />
-          <Typography variant="body 1" sx={{fontSize:"21px", marginLeft:"10px",color:theme.palette.textColor.main}}> Hello, Shafeek </Typography>
+          {currentUser && (
+            <Typography
+              variant="body1"
+              sx={{
+                fontSize: "21px",
+                marginLeft: "10px",
+                color: theme.palette.textColor.main,
+              }}
+            >
+              Hello, {userDetails?.name} ({userDetails?.role})
+            </Typography>
+          )}
 
           <Box flexGrow={1} />
           <Stack direction={"row"}>
-          <Search sx={{borderRadius:"15px" ,padding:"4px, 16px, 4px, 16px",bgcolor:"#F7F6F9" , color:"#6E8F72"}}>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
-              placeholder="Search…"
-              inputProps={{ "aria-label": "search" }}
-              className="btnHover"
-            />
-          </Search>
+            <Search
+              sx={{
+                borderRadius: "15px",
+                padding: "4px, 16px, 4px, 16px",
+                bgcolor: "#F7F6F8",
+                color: "#6E8F72",
+              }}
+            >
+              <SearchIconWrapper>
+                <SearchIcon />
+              </SearchIconWrapper>
+              <StyledInputBase
+                placeholder="Search…"
+                inputProps={{ "aria-label": "search" }}
+                className="btnHover"
+              />
+            </Search>
+            <Box sx={{ marginInline: "12px" }}>
+              {theme.palette.mode === "dark" ? (
+                <IconButton
+                  color={theme.palette.textColor.main}
+                  onClick={() => {
+                    setMode((prevMode) =>
+                      prevMode === "light" ? "dark" : "light"
+                    );
+                    localStorage.setItem(
+                      "currentMode",
+                      theme.palette.mode === "dark" ? "light" : "dark"
+                    );
+                  }}
+                >
+                  <LightModeOutlinedIcon />
+                </IconButton>
+              ) : (
+                <IconButton
+                  color={theme.palette.textColor.main}
+                  onClick={() => {
+                    setMode((prevMode) =>
+                      prevMode === "light" ? "dark" : "light"
+                    );
+                    localStorage.setItem(
+                      "currentMode",
+                      theme.palette.mode === "dark" ? "light" : "dark"
+                    );
+                  }}
+                >
+                  <DarkModeOutlinedIcon />
+                </IconButton>
+              )}
+            </Box>
 
-            {theme.palette.mode === "dark" ? (
-              <IconButton
-              color={theme.palette.textColor.main }
-                onClick={() => {
-                  setMode((prevMode) =>
-                    prevMode === "light" ? "dark" : "light"
-                  );
-                  localStorage.setItem(
-                    "currentMode",
-                    theme.palette.mode === "dark" ? "light" : "dark"
-                  );
-                }}
-              >
-                <LightModeOutlinedIcon />
-              </IconButton>
-            ) : (
-              <IconButton 
-              color={theme.palette.textColor.main }
-                onClick={() => {
-                  setMode((prevMode) =>
-                    prevMode === "light" ? "dark" : "light"
-                  );
-                  localStorage.setItem(
-                    "currentMode",
-                    theme.palette.mode === "dark" ? "light" : "dark"
-                  );
-                }}
-              >
-                <DarkModeOutlinedIcon />
-              </IconButton>
-            )}
-
-            <IconButton color={theme.palette.textColor.main }>
-              <NotificationsNoneOutlinedIcon />
-            </IconButton>
-
-
-            <Typography 
-            sx={{border:"2px solid grey" , 
-              borderRadius:"15px",
-              padding : "4px 13px" ,  
-              margin :"auto" , 
-              color:theme.palette.textColor.main
-            }}
-            variant="body1" onClick={handleLogout}> Logout </Typography>
+            <Button
+              sx={{
+                borderRadius: "15px",
+                padding: "4px 13px",
+                margin: "auto",
+                cursor: "pointer",
+              }}
+              variant="outlined"
+              color="success"
+              onClick={handleLogout}
+            >
+              Logout
+            </Button>
           </Stack>
         </Toolbar>
       </AppBar>

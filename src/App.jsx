@@ -5,7 +5,6 @@ import Home from "./Pages/Home/Home";
 import Dashboard from "./Pages/Dashboard/Dashboard";
 import BarChart from "./Pages/BarChart/BarChart";
 import Calendar from "./Pages/Calendar/Calendar";
-import Contacts from "./Pages/Contacts/Contacts";
 import Faq from "./Pages/Faq/Faq";
 import Form from "./Pages/Form/Form";
 import Invoices from "./Pages/Invoices/Invoices";
@@ -15,15 +14,16 @@ import Team from "./Pages/Team/Team";
 import Login from "./Pages/Auth/Login";
 import Signup from "./Pages/Auth/Signup";
 import ForgotPassword from "./Pages/Auth/ForgotPassword";
-import UpdateProfile from "./Pages/Auth/UpdateProfile";
 import NotFound from "./Pages/NotFound/NotFound";
 import AuthProvider from "./Context/authContext";
 import PrivateRoute from "./Context/PrivateRoute";
 import Companies from "./Pages/Companies/Companies";
-import Recycling from './Pages/Recycling/Recycling' ;
-import Managing from './Pages/Managing/Managing' ; 
+import Recycling from "./Pages/Recycling/Recycling";
+import Managing from "./Pages/Managing/Managing";
 
-import Antika from './Pages/Antika/Antika' ; 
+import Antika from "./Pages/Antika/Antika";
+import APIsContextProvider from "./Context/APIsContext";
+import Users from "./Pages/Users/Users";
 
 function App() {
   const routes = createBrowserRouter([
@@ -39,10 +39,7 @@ function App() {
       path: "forgot-password",
       element: <ForgotPassword />,
     },
-    {
-      path: "update-profile",
-      element: <UpdateProfile />,
-    },
+
     {
       path: "/",
       element: <Home />,
@@ -72,10 +69,10 @@ function App() {
           ),
         },
         {
-          path: "contacts",
+          path: "users",
           element: (
             <PrivateRoute>
-              <Contacts />
+              <Users />
             </PrivateRoute>
           ),
         },
@@ -166,14 +163,13 @@ function App() {
   ]);
 
   return (
-    <div
-      className="d-flex justify-content-center align-items-center"
-      style={{ minHeight: "100vh" }}
-    >
+    <div style={{ minHeight: "100vh" }}>
       <div className="w-100 ">
-        <AuthProvider>
-          <RouterProvider router={routes}></RouterProvider>
-        </AuthProvider>
+        <APIsContextProvider>
+          <AuthProvider>
+            <RouterProvider router={routes}></RouterProvider>
+          </AuthProvider>
+        </APIsContextProvider>
       </div>
     </div>
   );
