@@ -1,9 +1,13 @@
+  add-company-and-users-pages
 import React from "react";
 import CompanyCards from "../../Components/CompaniesComponent/CompanyCards";
 import ProfitChart from "../../Components/CompaniesComponent/ProfitChart";
 import ContributionChart from "../../Components/CompaniesComponent/ContributionChart";
 import { Grid } from "@mui/material";
 import CompaniesData from "../../Components/CompaniesComponent/CompaniesData";
+ 
+
+ 
 
 const Companies = () => {
   return (
