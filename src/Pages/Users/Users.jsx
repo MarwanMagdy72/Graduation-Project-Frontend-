@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Box, Typography, Button } from "@mui/material";
+import { Box, Typography, Button, useTheme } from "@mui/material";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { APIsContext } from "../../Context/APIsContext";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -75,6 +75,8 @@ export default function Users() {
   const [openUpdateModal, setOpenUpdateModal] = useState(false);
   const [openDeleteConfirmation, setOpenDeleteConfirmation] = useState(false);
 
+  const theme = useTheme();
+
   useEffect(() => {
     async function fetchUsers() {
       const res = await getUsers();
@@ -143,6 +145,19 @@ export default function Users() {
 
   return (
     <>
+      <Box
+        sx={{
+          mb: "20px",
+        }}
+      >
+        <Typography
+          color={theme.palette.success.light}
+          fontSize={"35px"}
+          fontWeight={"bold"}
+        >
+          All Users
+        </Typography>
+      </Box>
       <Box sx={{ height: "auto", width: "100%", m: "auto" }}>
         <DataGrid
           rows={contactsData}

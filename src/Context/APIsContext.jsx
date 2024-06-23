@@ -17,6 +17,33 @@ const APIsContextProvider = ({ children }) => {
     }
   }
 
+  // Function to delete a user by ID
+  async function deleteUser(userId) {
+    try {
+      const { data } = await axios.delete(
+        `https://api-service.cloud/recycle/public_html/api/dashbord/users/delete/${userId}`
+      );
+      return data;
+    } catch (err) {
+      console.error(`Error deleting user with ID ${userId}:`, err);
+      return null;
+    }
+  }
+
+  // Function to update user data
+  async function updateUser(userId, updatedData) {
+    try {
+      const { data } = await axios.post(
+        `https://api-service.cloud/recycle/public_html/api/dashbord/users/update/${userId}`,
+        updatedData
+      );
+      return data;
+    } catch (err) {
+      console.error(`Error updating user with ID ${userId}:`, err);
+      throw err;
+    }
+  }
+
   // Function to get companies
   async function getCompanies() {
     try {
@@ -91,45 +118,35 @@ const APIsContextProvider = ({ children }) => {
     }
   }
 
-  // Function to delete a user by ID
-  async function deleteUser(userId) {
-    try {
-      const { data } = await axios.delete(
-        `https://api-service.cloud/recycle/public_html/api/dashbord/users/delete/${userId}`
-      );
-      return data;
-    } catch (err) {
-      console.error(`Error deleting user with ID ${userId}:`, err);
-      return null;
-    }
-  }
-
-  // Function to update user data
-  async function updateUser(userId, updatedData) {
-    try {
-      const { data } = await axios.post(
-        `https://api-service.cloud/recycle/public_html/api/dashbord/users/update/${userId}`,
-        updatedData
-      );
-      return data;
-    } catch (err) {
-      console.error(`Error updating user with ID ${userId}:`, err);
-      return null;
-    }
-  }
-
-  // Function to get all recycle operations
-  async function getRecycleOperations() {
+  // Function to get all recycling operations
+  async function getRecyclingOperation() {
     try {
       const { data } = await axios.get(
         `https://api-service.cloud/recycle/public_html/api/users/recycle/showallopeartion`
       );
-      return data.data;
+      return data;
     } catch (err) {
-      console.error("Error fetching recycle operations:", err);
+      console.error("Error fetching users:", err);
       return null;
     }
   }
+
+  // Function to confirm recycle operation by ID
+  async function confirmRecycleOperation(operationId) {
+    try {
+      const { data } = await axios.get(
+        `https://api-service.cloud/recycle/public_html/api/users/recycle/Confirm_the_operation/${operationId}`
+      );
+      return data;
+    } catch (err) {
+      console.error(
+        `Error confirm recycle operation with ID ${operationId}:`,
+        err
+      );
+      return null;
+    }
+  }
+
   return (
     <APIsContext.Provider
       value={{
@@ -140,7 +157,8 @@ const APIsContextProvider = ({ children }) => {
         createCompany,
         deleteUser,
         updateUser,
-        getRecycleOperations,
+        getRecyclingOperation,
+        confirmRecycleOperation,
       }}
     >
       {children}

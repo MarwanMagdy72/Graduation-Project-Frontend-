@@ -15,7 +15,6 @@ import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import PeopleOutlinedIcon from "@mui/icons-material/PeopleOutlined";
 import ContactsOutlinedIcon from "@mui/icons-material/ContactsOutlined";
 import ReceiptOutlinedIcon from "@mui/icons-material/ReceiptOutlined";
-import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
 import CalendarMonthOutlinedIcon from "@mui/icons-material/CalendarMonthOutlined";
 import ContactSupportOutlinedIcon from "@mui/icons-material/ContactSupportOutlined";
 import BarChartOutlinedIcon from "@mui/icons-material/BarChartOutlined";
@@ -24,8 +23,9 @@ import TimelineOutlinedIcon from "@mui/icons-material/TimelineOutlined";
 
 import LocalShippingOutlinedIcon from "@mui/icons-material/LocalShippingOutlined";
 import RecyclingOutlinedIcon from "@mui/icons-material/RecyclingOutlined";
-import ManageHistoryOutlinedIcon from "@mui/icons-material/ManageHistoryOutlined";
 import FilterVintageOutlinedIcon from "@mui/icons-material/FilterVintageOutlined";
+import GroupAddIcon from "@mui/icons-material/GroupAdd";
+
 import { grey } from "@mui/material/colors";
 import "./SideBar.css";
 const Arr1 = [
@@ -50,11 +50,9 @@ const Arr1 = [
 const Arr2 = [
   { text: "Recycling", icon: <RecyclingOutlinedIcon />, path: "/recycle" },
 
-  { text: "Managing", icon: <ManageHistoryOutlinedIcon />, path: "/manage" },
-
   { text: "Antika ", icon: <FilterVintageOutlinedIcon />, path: "/antika" },
 
-  { text: "Profile Form", icon: <PersonOutlineOutlinedIcon />, path: "/form" },
+  { text: "Profile Form", icon: <GroupAddIcon />, path: "/form" },
 
   { text: "Calendar", icon: <CalendarMonthOutlinedIcon />, path: "/calendar" },
 

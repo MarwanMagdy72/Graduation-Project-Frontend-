@@ -1,4 +1,3 @@
-  add-company-and-users-pages
 import React from "react";
 import CompanyCards from "../../Components/CompaniesComponent/CompanyCards";
 import ProfitChart from "../../Components/CompaniesComponent/ProfitChart";
