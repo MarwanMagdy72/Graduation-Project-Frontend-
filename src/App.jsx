@@ -19,7 +19,6 @@ import AuthProvider from "./Context/authContext";
 import PrivateRoute from "./Context/PrivateRoute";
 import Companies from "./Pages/Companies/Companies";
 import Recycling from "./Pages/Recycling/Recycling";
-import Managing from "./Pages/Managing/Managing";
 
 import Antika from "./Pages/Antika/Antika";
 import APIsContextProvider from "./Context/APIsContext";
@@ -141,14 +140,7 @@ function App() {
             </PrivateRoute>
           ),
         },
-        {
-          path: "manage",
-          element: (
-            <PrivateRoute>
-              <Managing />
-            </PrivateRoute>
-          ),
-        },
+
         {
           path: "antika",
           element: (
