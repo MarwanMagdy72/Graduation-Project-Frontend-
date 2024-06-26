@@ -31,8 +31,8 @@ export default function BarChart({ inDashboard = false }) {
       >
         <ResponsiveBar
           data={data}
-          keys={["hot dog", "burger", "sandwich", "kebab", "fries", "donut"]}
-          indexBy="country"
+          keys={["Plastic", "iron", "paper", "glass", "antika", "cans"]}
+          indexBy="year"
           theme={{
             textColor: theme.palette.text.primary,
             fontSize: 11,
@@ -187,7 +187,7 @@ export default function BarChart({ inDashboard = false }) {
             tickSize: 5,
             tickPadding: 5,
             tickRotation: 0,
-            legend: "food",
+            legend: "range",
             legendPosition: "middle",
             legendOffset: -40,
             truncateTickAt: 0,

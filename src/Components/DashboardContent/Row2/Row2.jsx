@@ -40,7 +40,7 @@ const Row2 = () => {
 
   const handleSortByName = () => {
     const sorted = [...sortedItems].sort((a, b) => {
-      const nameA = a.title.toUpperCase(); // تحويل الأسماء إلى أحرف كبيرة للفرز الصحيح
+      const nameA = a.title.toUpperCase();  
       const nameB = b.title.toUpperCase();
       if (nameA < nameB) {
         return -1;

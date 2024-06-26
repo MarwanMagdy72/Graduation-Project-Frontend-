@@ -1,12 +1,12 @@
-import React, { useContext, useEffect, useState } from "react";
+
+import  { useContext, useEffect, useState } from "react";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import {
   Button,
   Card,
   Typography,
   Box,
-  useTheme,
-  IconButton,
+  
 } from "@mui/material";
 import { Stack } from "@mui/system";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -25,7 +25,7 @@ export default function CompaniesData() {
   const [currentCompany, setCurrentCompany] = useState({});
   const [deleteConfirmationOpen, setDeleteConfirmationOpen] = useState(false);
   const [companyIdToDelete, setCompanyIdToDelete] = useState(null);
-  const theme = useTheme();
+  // const theme = useTheme();
 
   useEffect(() => {
     async function fetchCompanies() {
@@ -182,6 +182,7 @@ export default function CompaniesData() {
           marginBlock: "20px",
           marginInline: "20px",
           justifyContent: "space-between",
+
         }}
         direction={"row"}
       >
@@ -189,11 +190,25 @@ export default function CompaniesData() {
           Companies and Factories
         </Typography>
         <Stack direction={"row"}>
-          <Button
-            variant="contained"
-            color="success"
+          <Button     
             onClick={handleOpenCreateModal}
+            sx={{
+              backgroundColor: "#2F8B3A",
+              color: "white",
+              borderRadius: "12px",
+              fontSize: "17px",
+              fontWeight: "400",
+              textAlign: "center",
+              padding: "5px 18px",
+              outline: "none",
+              border: "none",
+              textTransform: 'capitalize',
+              '&:hover': {
+                  backgroundColor: "#036103",
+              }
+          }}
           >
+
             Create +
           </Button>
         </Stack>

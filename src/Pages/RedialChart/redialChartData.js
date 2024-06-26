@@ -1,63 +1,63 @@
 export const redialChartData = [
   {
-    id: "Supermarket",
+    id: "Recycling",
     data: [
       {
-        x: "Vegetables",
+        x: "paper",
         y: 48,
       },
       {
-        x: "Fruits",
+        x: "iron ",
         y: 238,
       },
       {
-        x: "Meat",
+        x: "glass",
         y: 204,
       },
       {
-        x: "Fish",
+        x: "plastic",
         y: 273,
       },
     ],
   },
   {
-    id: "Combini",
+    id: "Antika",
     data: [
       {
-        x: "Vegetables",
+        x: "coins",
         y: 108,
       },
       {
-        x: "Fruits",
+        x: "camera",
         y: 131,
       },
       {
-        x: "Meat",
+        x: "jewelry",
         y: 167,
       },
       {
-        x: "Fish",
+        x: "metal",
         y: 176,
       },
     ],
   },
   {
-    id: "Online",
+    id: "Companies",
     data: [
       {
-        x: "Vegetables",
+        x: "cairo ",
         y: 22,
       },
       {
-        x: "Fruits",
+        x: "Alex",
         y: 124,
       },
       {
-        x: "Meat",
+        x: "Nile Petroleum",
         y: 183,
       },
       {
-        x: "Fish",
+        x: "Cleopatra",
         y: 238,
       },
     ],
