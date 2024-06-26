@@ -1,7 +1,8 @@
-import React from "react";
+ 
 import { Box, Typography, useTheme } from "@mui/material";
 import { ResponsiveRadialBar } from "@nivo/radial-bar";
 import { redialChartData } from "./redialChartData";
+
 
 export default function RedialChart({ inDashboard = false }) {
   const theme = useTheme();
@@ -19,11 +20,13 @@ export default function RedialChart({ inDashboard = false }) {
           <Typography fontWeight={"bold"}>Simple Radial Chart</Typography>
         </Box>
       )}
+
+
       <Box sx={{ height: inDashboard ? "390px" : "80vh" }}>
         <ResponsiveRadialBar
           data={redialChartData}
           valueFormat=">-.2f"
-          padding={0.4}
+          padding={0.5}
           cornerRadius={2}
           margin={{ top: 40, right: 120, bottom: 40, left: 40 }}
           radialAxisStart={{ tickSize: 5, tickPadding: 5, tickRotation: 0 }}

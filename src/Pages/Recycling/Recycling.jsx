@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { APIsContext } from "../../Context/APIsContext";
 import { Card, Typography } from "@mui/material";
 import { Box } from "@mui/system";

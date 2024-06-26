@@ -1,4 +1,4 @@
-import React from "react";
+ 
 import { Grid, Card, CardContent, Typography } from "@mui/material";
 import {
   Business,
@@ -8,6 +8,19 @@ import {
 } from "@mui/icons-material";
 import { Box, Stack } from "@mui/system";
 import TrendingUpIcon from '@mui/icons-material/TrendingUp';
+import TrendingDownIcon from '@mui/icons-material/TrendingDown';
+
+const getIcon = (type, color) => {
+  switch (type) {
+    case 'TrendingUp':
+      return <TrendingUpIcon style={{ color: color }} />;
+    case 'TrendingDown':
+      return <TrendingDownIcon style={{ color: color }} />;
+    default:
+      return null;
+  }
+};
+
 
 
 const CompanyCards = () => {
@@ -17,24 +30,37 @@ const CompanyCards = () => {
       title: "All Companies",
       count: "15 companies",
       amount: "2,500 EGP",
+      borderColor: "red",
+      bgcolor: "#f5cfcf",
+      iconType: "TrendingDown",
     },
     {
       icon: <AddBusiness />,
       title: "New Companies",
       count: "21 companies",
       amount: "4,500 EGP",
+      borderColor: "green",
+      bgcolor: "#dff3e2",
+      iconType: "TrendingUp",
+
     },
     {
       icon: <Factory />,
       title: "All Factories",
       count: "15 factories",
       amount: "2,500 EGP",
+      borderColor: "red",
+      bgcolor: "#f5cfcf",
+      iconType: "TrendingDown",
     },
     {
       icon: <AddCircleOutline />,
       title: "New Factories",
-      count: "3 factories",
+      count: "31 factories",
       amount: "2,500 EGP",
+      borderColor: "green",
+      bgcolor: "#dff3e2",
+      iconType: "TrendingUp",
     },
   ];
 
@@ -56,23 +82,26 @@ const CompanyCards = () => {
                   <Typography variant="subtitle1"> {card.icon} {card.count}</Typography>
                 </Box>
 
-                <Stack
-                direction={'row'}
-                  sx={{
-                    border: 2,
-                    borderRadius: "50% ",
-                    width: 120,
-                    height: 120,
-                    alignItems: "center",
-                    justifyContent:  "center",
-                    paddingBlock: "20px",
-                    borderColor: "#E73232",
-                    backgroundColor: "#FCE0E0",
-                  }}
-                >
-                  <TrendingUpIcon sx={{marginInlineEnd:'5px' , fontSize:"35px" ,color:'#E73232'}  } />
-                  <Typography color={"black"}>{card.amount}</Typography>
+  
+                <Stack direction={"row"} sx={{
+                  border: `2px solid ${card.borderColor}`,
+                  backgroundColor: card.bgcolor,
+                  textAlign: "center",
+                  width: "95px",
+                  height: "95px",
+                  borderRadius: "50%",
+                  justifyContent: "center",
+                  alignItems: "center" , 
+                  padding:"5px", 
+                }}>
+                  {getIcon(card.iconType, card.iconColor)}
+                  <Typography sx={{ color:"black" , fontSize: "14px", fontWeight: "700" ,marginLeft:"8px"}}>
+                      {card.amount}  
+                  </Typography>
                 </Stack>
+
+
+
               </Stack>
             </CardContent>
           </Card>
