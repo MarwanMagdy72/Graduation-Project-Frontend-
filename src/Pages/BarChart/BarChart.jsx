@@ -17,7 +17,7 @@ export default function BarChart({ inDashboard = false }) {
             Bar Chart
           </Typography>
           <Typography fontWeight={"bold"}>
-            The most popular foods in some countries
+            Statistics on various materials used in recycling.
           </Typography>
         </Box>
       )}

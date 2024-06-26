@@ -10,22 +10,20 @@ const Recycling = () => {
   const [recyclingData, setRecyclingData] = useState([]);
   const [numOfRecyclingOperations, setNumOfRecyclingOperations] = useState("");
 
+  const fetchRecyclingOperation = async () => {
+    const res = await getRecyclingOperation();
+    setRecyclingData(res.data);
+    setNumOfRecyclingOperations(res.totalopeartion);
+  };
+
   useEffect(() => {
-    async function fetchRecyclingOperation() {
-      const res = await getRecyclingOperation();
-      setRecyclingData(res.data);
-      setNumOfRecyclingOperations(res.totalopeartion);
-    }
     fetchRecyclingOperation();
   }, [getRecyclingOperation]);
 
-  
-
-  async function fetchConfirmRecyclingOperation(id) {
+  const fetchConfirmRecyclingOperation = async (id) => {
     await confirmRecycleOperation(id);
-    //  to refresh the data after confirming
-    fetchRecyclingOperation();
-  }
+    fetchRecyclingOperation(); // Refresh the data after confirming
+  };
 
   const columns = createColumns(fetchConfirmRecyclingOperation);
 
@@ -44,7 +42,7 @@ const Recycling = () => {
             pageSize={5}
             checkboxSelection
             components={{ Toolbar: GridToolbar }}
-            getRowId={() => crypto.randomUUID()}
+            getRowId={(row) => row.id}
           />
         </Box>
       </Card>

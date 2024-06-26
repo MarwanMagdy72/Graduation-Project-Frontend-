@@ -1,4 +1,3 @@
- 
 import { Grid, Card, CardContent, Typography } from "@mui/material";
 import {
   Business,
@@ -7,21 +6,19 @@ import {
   AddCircleOutline,
 } from "@mui/icons-material";
 import { Box, Stack } from "@mui/system";
-import TrendingUpIcon from '@mui/icons-material/TrendingUp';
-import TrendingDownIcon from '@mui/icons-material/TrendingDown';
+import TrendingUpIcon from "@mui/icons-material/TrendingUp";
+import TrendingDownIcon from "@mui/icons-material/TrendingDown";
 
 const getIcon = (type, color) => {
   switch (type) {
-    case 'TrendingUp':
+    case "TrendingUp":
       return <TrendingUpIcon style={{ color: color }} />;
-    case 'TrendingDown':
+    case "TrendingDown":
       return <TrendingDownIcon style={{ color: color }} />;
     default:
       return null;
   }
 };
-
-
 
 const CompanyCards = () => {
   const cards = [
@@ -42,7 +39,6 @@ const CompanyCards = () => {
       borderColor: "green",
       bgcolor: "#dff3e2",
       iconType: "TrendingUp",
-
     },
     {
       icon: <Factory />,
@@ -79,29 +75,38 @@ const CompanyCards = () => {
                   >
                     {card.title}
                   </Typography>
-                  <Typography variant="subtitle1"> {card.icon} {card.count}</Typography>
+                  <Typography variant="subtitle1">
+                    {" "}
+                    {card.icon} {card.count}
+                  </Typography>
                 </Box>
 
-  
-                <Stack direction={"row"} sx={{
-                  border: `2px solid ${card.borderColor}`,
-                  backgroundColor: card.bgcolor,
-                  textAlign: "center",
-                  width: "95px",
-                  height: "95px",
-                  borderRadius: "50%",
-                  justifyContent: "center",
-                  alignItems: "center" , 
-                  padding:"5px", 
-                }}>
+                <Stack
+                  direction={"row"}
+                  sx={{
+                    border: `2px solid ${card.borderColor}`,
+                    backgroundColor: card.bgcolor,
+                    textAlign: "center",
+                    width: "120px",
+                    height: "120px",
+                    borderRadius: "50%",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    padding: "5px",
+                  }}
+                >
                   {getIcon(card.iconType, card.iconColor)}
-                  <Typography sx={{ color:"black" , fontSize: "14px", fontWeight: "700" ,marginLeft:"8px"}}>
-                      {card.amount}  
+                  <Typography
+                    sx={{
+                      color: "black",
+                      fontSize: "14px",
+                      fontWeight: "700",
+                      marginLeft: "8px",
+                    }}
+                  >
+                    {card.amount}
                   </Typography>
                 </Stack>
-
-
-
               </Stack>
             </CardContent>
           </Card>

@@ -1,32 +1,44 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 import {
   Dialog,
   DialogTitle,
   DialogContent,
   DialogActions,
-  TextField,
   Button,
-} from "@mui/material";
+  TextField,
+} from '@mui/material';
 
-const UpdateUserModal = ({ open, onClose, onUpdate, userData }) => {
-  const [updatedUserData, setUpdatedUserData] = useState({});
+const UpdateUserModal = ({ open, onClose, onSubmit, userData }) => {
+  const [formValues, setFormValues] = useState({
+    name: '',
+    email: '',
+    password: '',
+    phone: '',
+    password_confirmation: '',
+  });
 
   useEffect(() => {
     if (userData) {
-      setUpdatedUserData(userData);
+      setFormValues({
+        name: userData.name || '',
+        email: userData.email || '',
+        password: '',
+        phone: userData.phone || '',
+        password_confirmation: '',
+      });
     }
   }, [userData]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setUpdatedUserData((prevData) => ({
-      ...prevData,
+    setFormValues((prev) => ({
+      ...prev,
       [name]: value,
     }));
   };
 
   const handleSubmit = () => {
-    onUpdate(updatedUserData);
+    onSubmit(formValues);
   };
 
   return (
@@ -34,43 +46,48 @@ const UpdateUserModal = ({ open, onClose, onUpdate, userData }) => {
       <DialogTitle>Update User</DialogTitle>
       <DialogContent>
         <TextField
+          margin="dense"
           name="name"
           label="Name"
+          type="text"
           fullWidth
-          value={updatedUserData.name || ""}
+          value={formValues.name}
           onChange={handleChange}
-          sx={{marginTop:'15px'}}
         />
         <TextField
+          margin="dense"
           name="email"
           label="Email"
+          type="email"
           fullWidth
-          value={updatedUserData.email || ""}
+          value={formValues.email}
           onChange={handleChange}
-          sx={{marginBlock:'15px'}}
         />
         <TextField
+          margin="dense"
           name="phone"
           label="Phone"
+          type="text"
           fullWidth
-          value={updatedUserData.phone || ""}
+          value={formValues.phone}
           onChange={handleChange}
         />
         <TextField
+          margin="dense"
           name="password"
           label="Password"
           type="password"
           fullWidth
-          value={updatedUserData.password || ""}
+          value={formValues.password}
           onChange={handleChange}
-          sx={{marginBlock:'15px'}}
         />
         <TextField
+          margin="dense"
           name="password_confirmation"
           label="Confirm Password"
           type="password"
           fullWidth
-          value={updatedUserData.password_confirmation || ""}
+          value={formValues.password_confirmation}
           onChange={handleChange}
         />
       </DialogContent>
@@ -78,7 +95,7 @@ const UpdateUserModal = ({ open, onClose, onUpdate, userData }) => {
         <Button onClick={onClose} color="primary">
           Cancel
         </Button>
-        <Button onClick={handleSubmit} color="primary">
+        <Button onClick={handleSubmit} color="primary" variant="contained">
           Update
         </Button>
       </DialogActions>

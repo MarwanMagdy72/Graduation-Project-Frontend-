@@ -40,7 +40,7 @@ const APIsContextProvider = ({ children }) => {
       return data;
     } catch (err) {
       console.error(`Error updating user with ID ${userId}:`, err);
-      throw err;
+      return null;
     }
   }
 
@@ -126,7 +126,7 @@ const APIsContextProvider = ({ children }) => {
       );
       return data;
     } catch (err) {
-      console.error("Error fetching users:", err);
+      console.error("Error fetching recycling operations:", err);
       return null;
     }
   }
@@ -140,7 +140,7 @@ const APIsContextProvider = ({ children }) => {
       return data;
     } catch (err) {
       console.error(
-        `Error confirm recycle operation with ID ${operationId}:`,
+        `Error confirming recycle operation with ID ${operationId}:`,
         err
       );
       return null;
@@ -151,12 +151,12 @@ const APIsContextProvider = ({ children }) => {
     <APIsContext.Provider
       value={{
         getUsers,
+        deleteUser,
+        updateUser,
         getCompanies,
         deleteCompany,
         updateCompany,
         createCompany,
-        deleteUser,
-        updateUser,
         getRecyclingOperation,
         confirmRecycleOperation,
       }}

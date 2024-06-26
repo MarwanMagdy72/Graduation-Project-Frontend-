@@ -63,7 +63,7 @@ export const createColumns = (fetchConfirmRecyclingOperation) => [
           color: params.value === null ? "red" : "green",
         }}
       >
-        {params.value === null ? "pinned" : "confirmed"}
+        {params.value === null ? "pending ⌛" : "confirmed ✅"}
       </Typography>
     ),
   },
